@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import './App.css';
 
 // page
-import Main from './page/main';
+import Main from './page/Main';
 
 function App() {
   return (

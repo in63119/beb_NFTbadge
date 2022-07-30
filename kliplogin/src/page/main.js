@@ -1,23 +1,36 @@
 import React, {useState} from 'react';
 import { Box, Button } from '@mui/material';
-
+import LoginButton from '../component/LoginButton';
 
 
 export default function Main() {
- const [isLogin, setIsLogin] = useState(false);
+ const [isUser, setIsUser] = useState({
+  isLogin: false,
+  mainAddress: '',
+  testAddress: ''
+ });
+
+ const getUser = (address) => {
+  setIsUser({
+    isLogin: true,
+    mainAddress: address,
+    testAddress: ''
+  })
+ }
 
  return (
   <Box>
-    {isLogin ? (
+    {isUser.isLogin ? (
       <Box sx={{ display : 'flex',flexDirection: 'column', justifyContent: 'center'}}>
-      <Box sx={{display : 'flex', justifyContent: 'center', my:'5%' }}>메인 화면</Box>
+      <Box sx={{display : 'flex', justifyContent: 'center', my:'5%' }}>로그인 후 메인화면</Box>
       <Box sx={{display : 'flex', justifyContent: 'center' }}> 
         <Box sx={{ display : 'flex', justifyContent: 'center', border: 1, width: '75%', padding: '5%' }}>
-          <Box>dma?</Box>
+          <Box>Main net Address: {isUser.mainAddress}</Box>
+          <Box>Test net Address: {isUser.testAddress}</Box>
         </Box>
       </Box>
       <Box sx={{display : 'flex', justifyContent: 'center',mt: '5%'}}>
-        <Button variant="contained">Login</Button>
+        <Button variant="contained">LogOut</Button>
       </Box>
     </Box>
     ) : (
@@ -29,7 +42,7 @@ export default function Main() {
         </Box>
       </Box>
       <Box sx={{display : 'flex', justifyContent: 'center',mt: '5%'}}>
-        <Button variant="contained">Login</Button>
+        <LoginButton user={getUser}/>
       </Box>
     </Box>
     )}
