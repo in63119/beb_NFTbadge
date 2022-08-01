@@ -1,32 +1,31 @@
-import React, {useState} from 'react';
+import React,{useEffect} from 'react';
 import { Box, Button } from '@mui/material';
 import LoginButton from '../component/LoginButton';
-
+import { useRecoilState } from 'recoil';
+import {userState} from '../recoil/user';
 
 export default function Main() {
- const [isUser, setIsUser] = useState({
-  isLogin: false,
-  mainAddress: '',
-  testAddress: ''
- });
-
- const getUser = (address) => {
-  setIsUser({
-    isLogin: true,
-    mainAddress: address,
-    testAddress: ''
-  })
- }
-
+  const [user, setUser] = useRecoilState(userState);
+  console.log(user);
+//   useEffect(() => {
+//     if (user.isLogin) {
+//         try {
+            
+//             console.log(user);
+//         } catch (err) {
+//             console.log("ㅇㅡㅁ?");
+//         }
+//     }
+// }, [user]);
  return (
   <Box>
-    {isUser.isLogin ? (
+    {user ? (
       <Box sx={{ display : 'flex',flexDirection: 'column', justifyContent: 'center'}}>
       <Box sx={{display : 'flex', justifyContent: 'center', my:'5%' }}>로그인 후 메인화면</Box>
       <Box sx={{display : 'flex', justifyContent: 'center' }}> 
         <Box sx={{ display : 'flex', justifyContent: 'center', border: 1, width: '75%', padding: '5%' }}>
-          <Box>Main net Address: {isUser.mainAddress}</Box>
-          <Box>Test net Address: {isUser.testAddress}</Box>
+          <Box>Main net Address: {user.address}</Box>
+          <Box>Test net Address: {user.testAddress}</Box>
         </Box>
       </Box>
       <Box sx={{display : 'flex', justifyContent: 'center',mt: '5%'}}>
@@ -42,7 +41,7 @@ export default function Main() {
         </Box>
       </Box>
       <Box sx={{display : 'flex', justifyContent: 'center',mt: '5%'}}>
-        <LoginButton user={getUser}/>
+        <LoginButton />
       </Box>
     </Box>
     )}

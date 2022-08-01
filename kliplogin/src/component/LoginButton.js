@@ -2,11 +2,10 @@ import React, {useState} from 'react';
 import { Box, Button } from '@mui/material';
 import KlipLogin from './KlipLogin';
 
-export default function LoginButton(user) {
+export default function LoginButton() {
   const [isWalletOpen, setIsWalletOpen] = useState(false);
 
   function handleWalletOpen(wallet) {
-    // console.log(user);
     switch (wallet) {
       case 'klip':
         setIsWalletOpen(true);
@@ -31,7 +30,6 @@ export default function LoginButton(user) {
       <Button variant="contained" onClick={() => handleWalletOpen('klip')}>Login</Button>
       <KlipLogin 
         open={isWalletOpen} 
-        user={user}
         onClose={() => handleWalletClose('klip')} 
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

@@ -5,6 +5,8 @@ import { Box, Dialog, DialogTitle, DialogContent, DialogContentText, Button, Dia
 import { RefreshRounded } from '@mui/icons-material';
 import {postPrepare, getResult} from '../API/Klip';
 import useInterval from '../hooks/useInterval';
+import { useSetRecoilState } from 'recoil';
+import { userState } from '../recoil/user';
 
 function makeQRURL(requestKey) {
   return `https://klipwallet.com/?target=/a2a?request_key=${requestKey}`;
@@ -12,7 +14,8 @@ function makeQRURL(requestKey) {
 
 const intialRemainingTime = 120;
 
-export default function KlipLogin({open, onClose, user}) {
+export default function KlipLogin({open, onClose}) {
+  const setUser = useSetRecoilState(userState);
   const [requestKey, setRequestKey] = useState('');
   const [remaining, setRemaining] = useState(0);
   const requestPostPrepare = async () => {
@@ -33,7 +36,7 @@ export default function KlipLogin({open, onClose, user}) {
 
             const address = await getResult(requestKey);
             if (address) {
-              user(address);
+              setUser({ address });
               onClose();
             }
         }
