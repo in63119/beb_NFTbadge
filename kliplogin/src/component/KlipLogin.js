@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { RefreshRounded } from "@mui/icons-material";
 import { postPrepare, getResult } from "../API/Klip";
+import { getTestAddress } from "../API/User";
 import useInterval from "../hooks/useInterval";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../recoil/user";
@@ -22,7 +23,7 @@ function makeQRURL(requestKey) {
 
 const intialRemainingTime = 120;
 
-export default function KlipLogin({ open, onClose }) {
+export default function KlipLogin({ open, onClose, user }) {
   const setUser = useSetRecoilState(userState);
   const [requestKey, setRequestKey] = useState("");
   const [remaining, setRemaining] = useState(0);
@@ -44,7 +45,12 @@ export default function KlipLogin({ open, onClose }) {
 
         const address = await getResult(requestKey);
         if (address) {
-          setUser({ isLogin: true, address });
+          const secondAddress = await getTestAddress(user);
+          setUser({
+            isLogin: true,
+            mainAddress: address,
+            testAddress: secondAddress,
+          });
           onClose();
         }
       }

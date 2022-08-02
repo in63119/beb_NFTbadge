@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import LoginButton from "../component/LoginButton";
 import LogoutButton from "../component/LogoutButton";
+import GetTestAddressButton from "../component/GetTestAddressButton";
 import { useRecoilState } from "recoil";
 import { userState } from "../recoil/user";
 
@@ -10,7 +11,7 @@ export default function Main() {
 
   useEffect(() => {
     if (user.isLogin) {
-      console.log("있다.");
+      console.log("로그인이 잘 되었다.");
     } else {
       console.log("없다.");
     }
@@ -39,8 +40,9 @@ export default function Main() {
                 padding: "5%",
               }}
             >
-              <Box>Main net Address: {user.address}</Box>
+              <Box>Main net Address: {user.mainAddress}</Box>
               <Box>Test net Address: {user.testAddress}</Box>
+              <GetTestAddressButton user={user} />
             </Box>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "center", mt: "5%" }}>
@@ -72,7 +74,7 @@ export default function Main() {
             </Box>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "center", mt: "5%" }}>
-            <LoginButton />
+            <LoginButton user={user} />
           </Box>
         </Box>
       )}
