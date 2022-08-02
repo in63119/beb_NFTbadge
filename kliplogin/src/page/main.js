@@ -40,9 +40,9 @@ export default function Main() {
                 padding: "5%",
               }}
             >
-              <Box>Main net Address: {user.mainAddress}</Box>
+              <Box sx={{ mb: "5%" }}>Main net Address: {user.mainAddress}</Box>
               <Box>Test net Address: {user.testAddress}</Box>
-              <GetTestAddressButton user={user} />
+              {/* <GetTestAddressButton user={user} /> */}
             </Box>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "center", mt: "5%" }}>
