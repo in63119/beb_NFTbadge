@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import LoginButton from "../component/LoginButton";
 import LogoutButton from "../component/LogoutButton";
-import GetTestAddressButton from "../component/GetTestAddressButton";
+// import GetTestAddressButton from "../component/GetTestAddressButton";
 import { useRecoilState } from "recoil";
 import { userState } from "../recoil/user";
 
