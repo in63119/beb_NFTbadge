@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const serverAPI = `http://localhost:4000/user`;
+const serverAPI = `https://localhost:4000/user`;
 
 export async function getTestAddress(body) {
   try {
