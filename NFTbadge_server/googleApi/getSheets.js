@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
+const {Student} = require('../models');
 
 // 구글 시트 관련
 const {google} = require('googleapis');
@@ -23,7 +24,7 @@ const googleSheet = google.sheets({
 
 module.exports = {
   // 구글 시트 링크 : https://docs.google.com/spreadsheets/d/17AmDvCkjMAfoVlwWRSgmMwGW8S2I2ldelQscFtAwbdI/edit?usp=sharing
-  // 위의 구글 시트의 'Badge_test' 시트의 B column(수강생 이름)의 데이터를 다 보여줍니다.
+  // 위의 구글 시트의 'Badge_test' 시트의 [수강생 이름, 유저아이디, 이메일] 데이터를 보여줍니다.
   getSheets: async () => {
     try {
       const res = await googleSheet.spreadsheets.values.get({
@@ -31,7 +32,20 @@ module.exports = {
         range: 'Badge_test!B:D2'
       });
       let result = res.data.values;
-      console.log(result);
+
+      for(let i = 0; i < result.length; i++) {
+        const [user, created] =  await Student.findOrCreate({
+          where: {
+            name: result[i][0],
+          }, defaults: {
+            userid: result[i][1],
+            email: result[i][2]
+          }
+        });
+        console.log(created);
+        
+      }
+      
       return result;
     } catch (error) {
       throw new Error(error);
