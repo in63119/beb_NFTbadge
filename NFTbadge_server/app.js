@@ -6,14 +6,14 @@ const app = express();
 const port = 4000;
 
 const user = require("./routes/user");
-const webhooks = require("./routes/webhooks");
+const {getSheets} = require("./api/getSheets");
 
 app.use(cors());
 app.use(express.json());
 
 // 유저 router
 app.use("/user", user);
-app.use("/webhook", webhooks);
+getSheets();
 
 https
   .createServer({
