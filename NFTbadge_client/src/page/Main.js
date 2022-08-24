@@ -6,6 +6,8 @@ import LogoutButton from "../component/LogoutButton";
 import { useRecoilState } from "recoil";
 import { userState } from "../recoil/user";
 
+import logo from '../images/codestatesLogo.png';
+
 export default function Main() {
   const [user, setUser] = useRecoilState(userState);
 
@@ -26,28 +28,28 @@ export default function Main() {
             justifyContent: "center",
           }}
         >
-          <Box sx={{ display: "flex", justifyContent: "center", my: "5%" }}>
-            로그인 후 메인화면
-          </Box>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                flexDirection: "column",
-                border: 1,
-                width: "75%",
-                padding: "5%",
-              }}
-            >
-              <Box sx={{ mb: "5%" }}>Main net Address: {user.mainAddress}</Box>
-              <Box>Test net Address: {user.testAddress}</Box>
-              {/* <GetTestAddressButton user={user} /> */}
+            <img src={logo} width='20%' height='20%'/>
+          </Box>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  border: 1,
+                  width: "75%",
+                  padding: "5%",
+                }}
+              >
+                <Box sx={{ mb: "5%" }}>Main net Address: {user.mainAddress}</Box>
+                <Box>Test net Address: {user.testAddress}</Box>
+                {/* <GetTestAddressButton user={user} /> */}
+              </Box>
             </Box>
-          </Box>
-          <Box sx={{ display: "flex", justifyContent: "center", mt: "5%" }}>
-            <LogoutButton />
-          </Box>
+            <Box sx={{ display: "flex", justifyContent: "center", mt: "5%" }}>
+              <LogoutButton />
+            </Box>
         </Box>
       ) : (
         <Box
@@ -57,24 +59,26 @@ export default function Main() {
             justifyContent: "center",
           }}
         >
-          <Box sx={{ display: "flex", justifyContent: "center", my: "5%" }}>
-            메인 화면
-          </Box>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                border: 1,
-                width: "75%",
-                padding: "5%",
-              }}
-            >
-              <Box>이 곳은 유저 정보 창</Box>
-            </Box>
+            <img src={logo} width='20%' height='20%'/>
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "center", mt: "5%" }}>
-            <LoginButton user={user} />
+          <Box sx={{bgcolor: 'text.disabled'}}>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  border: 1,
+                  width: "75%",
+                  padding: "5%",
+                }}
+              >
+                <Box>이 곳은 유저 정보 창</Box>
+              </Box>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "center", mt: "5%" }}>
+              <LoginButton user={user} />
+            </Box>
           </Box>
         </Box>
       )}
