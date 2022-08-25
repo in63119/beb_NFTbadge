@@ -42,7 +42,11 @@ module.exports = {
             email: result[i][2]
           }
         });
-        console.log(created);
+
+        if(!created) {
+          console.log('유저가 이미 있어 DB에 추가하지 않았습니다.');
+        }
+        
         
       }
       

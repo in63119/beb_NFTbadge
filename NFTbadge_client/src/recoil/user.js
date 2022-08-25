@@ -7,6 +7,7 @@ export const userState = atom({
     key: 'user',
     default: {
         isLogin: false,
+        name: '',
         mainAddress: '',
         testAddress: '',
     },

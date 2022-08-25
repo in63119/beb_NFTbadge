@@ -6,14 +6,12 @@ const app = express();
 const port = 4000;
 
 const user = require("./routes/user");
-const {getSheets} = require("./googleApi/getSheets");
 
 app.use(cors());
 app.use(express.json());
 
 // 유저 router
 app.use("/user", user);
-getSheets();
 
 https
   .createServer({

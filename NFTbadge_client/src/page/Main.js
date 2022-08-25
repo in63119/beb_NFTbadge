@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { Box, Button } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import LoginButton from "../component/LoginButton";
 import LogoutButton from "../component/LogoutButton";
-// import GetTestAddressButton from "../component/GetTestAddressButton";
+import Login from "../component/Login";
 import { useRecoilState } from "recoil";
 import { userState } from "../recoil/user";
 
@@ -62,23 +62,23 @@ export default function Main() {
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <img src={logo} width='20%' height='20%'/>
           </Box>
-          <Box sx={{bgcolor: 'text.disabled'}}>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  border: 1,
-                  width: "75%",
-                  padding: "5%",
-                }}
-              >
-                <Box>이 곳은 유저 정보 창</Box>
-              </Box>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                border: 1,
+                width: "200px",
+                padding: "5%",
+                borderRadius: '12px',
+                boxShadow: 3
+              }}
+            >
+              <Login />
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "center", mt: "5%" }}>
-              <LoginButton user={user} />
-            </Box>
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "center", mt: "5%" }}>
+            <LoginButton user={user} />
           </Box>
         </Box>
       )}
