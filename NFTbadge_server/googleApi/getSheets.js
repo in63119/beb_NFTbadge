@@ -34,15 +34,18 @@ module.exports = {
       let result = res.data.values;
 
       for(let i = 0; i < result.length; i++) {
+        
         const [user, created] =  await Student.findOrCreate({
           where: {
-            name: result[i][0],
+            userid: result[i][1]
           }, defaults: {
-            userid: result[i][1],
+            name: result[i][0],
             email: result[i][2]
           }
         });
+        // console.log(user);
       }
+      
       return result;
     } catch (error) {
       throw new Error(error);

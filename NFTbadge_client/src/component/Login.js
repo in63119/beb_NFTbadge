@@ -19,12 +19,12 @@ export default function Login() {
   }
 
   const handleTwoOrMoreUser = () => {
-    console.log('잘 되었나 볼까?')
+    console.log('이펙트는 잘 들어왔다', twoOrMoreUser)
   }
 
   useEffect(() => {
     if (isManyUser) {
-      handleTwoOrMoreUser();
+      handleTwoOrMoreUser(isManyUser);
     } 
   });
   // console.log(twoOrMoreUser, isManyUser);
@@ -34,9 +34,9 @@ export default function Login() {
       <Fade in={isManyUser} timeout={2000}>
         <FormControl>
           <RadioGroup>
-            {twoOrMoreUser.map(i => {
+            {/* {twoOrMoreUser.map(i => {
               <FormControlLabel value={i} control={<Radio />} label="df"/>
-            })}
+            })} */}
           </RadioGroup>
         </FormControl>
       </Fade>
