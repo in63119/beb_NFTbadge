@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Box, TextField, Fade, Radio, FormControl, RadioGroup, FormControlLabel } from "@mui/material";
+import React, { useState } from "react";
+import { Box, TextField, Fade, FormControl, InputLabel, Select, MenuItem} from "@mui/material";
 import { postUser } from "../API/Login";
 
 export default function Login() {
   const [isManyUser, setIsManyUser] = useState(false);
   const [twoOrMoreUser, setTwoOrMoreUser] = useState(null);
+  const [selectUserEmail, setSelectUserEmail] = useState('');
 
   const handleOnChange = async (e) => {
     if (e.length === 0) {
@@ -18,28 +19,30 @@ export default function Login() {
     }
   }
 
-  const handleTwoOrMoreUser = () => {
-    console.log('이펙트는 잘 들어왔다', twoOrMoreUser)
+  const handleSelect = (e) => {
+    setSelectUserEmail(e.target.value);
   }
 
-  useEffect(() => {
-    if (isManyUser) {
-      handleTwoOrMoreUser(isManyUser);
-    } 
-  });
-  // console.log(twoOrMoreUser, isManyUser);
+  // console.log('요기는 잘 들어오?', twoOrMoreUser);
   return (
     <Box>
-      <TextField id="standard-basic" label="수강생의 이름을 적어주세요" variant="standard" onChange={handleOnChange}/>
-      <Fade in={isManyUser} timeout={2000}>
-        <FormControl>
-          <RadioGroup>
-            {/* {twoOrMoreUser.map(i => {
-              <FormControlLabel value={i} control={<Radio />} label="df"/>
-            })} */}
-          </RadioGroup>
-        </FormControl>
-      </Fade>
+      <TextField id="standard-basic" label="수강생의 이름을 적어주세요" variant="standard" onChange={handleOnChange}
+        sx={{mb : '10%'}}
+      />
+      {twoOrMoreUser ? 
+        <Fade in={isManyUser} timeout={2000}>
+          <FormControl fullWidth variant="filled" >
+            <InputLabel>이메일을 확인해주세요.</InputLabel>
+            <Select value={selectUserEmail} label="email" onChange={handleSelect}>
+              {twoOrMoreUser.map((el) => (
+                <MenuItem value={el} key={el}>{el}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Fade> 
+        :
+        null
+      }
     </Box>
   );
 }
