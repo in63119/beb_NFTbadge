@@ -18,6 +18,10 @@ export default function Main() {
   //     console.log("없다.");
   //   }
   // }, [user]);
+  const handleClick = () => {
+    window.location.reload();
+  }
+
   return (
     <Box>
       {user.isLogin ? (
@@ -60,7 +64,7 @@ export default function Main() {
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <img src={logo} width='200px' height='200px'/>
+            <img src={logo} width='200px' height='200px' onClick={handleClick}/>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box
