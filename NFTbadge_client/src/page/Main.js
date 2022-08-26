@@ -63,8 +63,10 @@ export default function Main() {
             justifyContent: "center",
           }}
         >
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <img src={logo} width='200px' height='200px' onClick={handleClick}/>
+          <Box sx={{ display: "flex", justifyContent: "center"}}>
+            <Box sx={{cursor:"pointer"}}>
+              <img src={logo} width='250px' height='250px' onClick={handleClick}/>
+            </Box>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box
