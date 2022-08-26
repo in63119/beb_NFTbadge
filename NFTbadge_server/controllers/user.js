@@ -1,5 +1,6 @@
-const testAddress = require("./getTestAddress");
+// const testAddress = require("./getTestAddress");
 const {getSheets} = require("../googleApi/getSheets");
+const {Student} = require('../models');
 
 module.exports = {
   // createUser: (req, res) => {
@@ -11,9 +12,17 @@ module.exports = {
   //   });
   // },
 
-  postUser: (req, res) => {
-    getSheets();
-    console.log("바디", req.body);
-    return res.status(200).send({message: '아직 기다려'});
+  postUser: async (req, res) => {
+    await getSheets();
+    // console.log("바디", req.body);
+    const result = await Student.findAll({ where: { name: req.body.name}})
+      .then((data) => {
+        // console.log("디비", res);
+        res.status(200).send({message: '이것 중에 있어?', data});
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      });
   }
 };

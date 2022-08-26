@@ -11,13 +11,13 @@ import logo from '../images/codestatesLogo.png';
 export default function Main() {
   const [user, setUser] = useRecoilState(userState);
 
-  useEffect(() => {
-    if (user.isLogin) {
-      console.log("로그인이 잘 되었다.");
-    } else {
-      console.log("없다.");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user.isLogin) {
+  //     console.log("로그인이 잘 되었다.");
+  //   } else {
+  //     console.log("없다.");
+  //   }
+  // }, [user]);
   return (
     <Box>
       {user.isLogin ? (
@@ -29,7 +29,7 @@ export default function Main() {
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <img src={logo} width='20%' height='20%'/>
+            <img src={logo} width='200px' height='200px'/>
           </Box>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Box
@@ -60,7 +60,7 @@ export default function Main() {
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <img src={logo} width='20%' height='20%'/>
+            <img src={logo} width='200px' height='200px'/>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box
@@ -78,7 +78,7 @@ export default function Main() {
             </Box>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "center", mt: "5%" }}>
-            <LoginButton user={user} />
+            {/* <LoginButton user={user} /> */}
           </Box>
         </Box>
       )}

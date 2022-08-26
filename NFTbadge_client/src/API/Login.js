@@ -16,12 +16,22 @@ export async function postUser(body) {
         { withCredentials: true }
       )
       .then((res) => {
-        if (res.status === 200) {
-          console.log(res);
+        if (res.data.data.length >= 1) {
+          let someData = res.data.data;
+          let result = [];
+          someData.forEach(i => {
+            result.push(i.email);
+          })
+          // console.log(result);
+          return result;
+        } else {
+          return false;
         }
-        
       });
-    return res;
+    if (res) {
+      // console.log(res);
+      return res;
+    }
   } catch (error) {
     throw new Error(error);
   }
