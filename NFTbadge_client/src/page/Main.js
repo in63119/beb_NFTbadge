@@ -10,6 +10,7 @@ import logo from '../images/codestatesLogo.png';
 
 export default function Main() {
   const [user, setUser] = useRecoilState(userState);
+  console.log(user);
 
   // useEffect(() => {
   //   if (user.isLogin) {

@@ -2,13 +2,8 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import QRCode from "qrcode.react";
 import {
-  Box,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
   Button,
-  DialogActions,
+  Card, CardContent, Typography
 } from "@mui/material";
 import { RefreshRounded } from "@mui/icons-material";
 import { postPrepare, getResult } from "../API/Klip";
@@ -23,7 +18,7 @@ function makeQRURL(requestKey) {
 
 const intialRemainingTime = 120;
 
-export default function KlipLogin({ open, onClose, user }) {
+export default function KlipLogin({ open, email }) {
   const setUser = useSetRecoilState(userState);
   const [requestKey, setRequestKey] = useState("");
   const [remaining, setRemaining] = useState(0);
@@ -45,46 +40,36 @@ export default function KlipLogin({ open, onClose, user }) {
 
         const address = await getResult(requestKey);
         if (address) {
-          const secondAddress = await getTestAddress(user);
+          const secondAddress = await getTestAddress(email, address);
           setUser({
             isLogin: true,
             mainAddress: address,
             testAddress: secondAddress,
           });
-          onClose();
         }
       }
     },
-    open && remaining > 0 ? 1000 : null
+    remaining > 0 ? 1000 : null
   );
 
   return (
-    <Dialog
+    <Card
       open={open}
-      onClose={() => onClose()}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">Klip 지갑 로그인</DialogTitle>
-      <DialogContent>
-        <Box
-          sx={{
-            backgroundColor: "text.primary",
-            borderRadius: 1,
-            position: "relative",
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>QR Code를 통해 로그인하세요</Typography>
+        <QRCode
+          value={makeQRURL(requestKey)}
+          style={{
+            width: "100%",
+            height: "100%",
           }}
-        >
-          <QRCode
-            value={makeQRURL(requestKey)}
-            style={{
-              width: "100%",
-              height: "100%",
-            }}
-          />
-        </Box>
-        <DialogContentText id="alert-dialog-description" sx={{ mt: 2, mb: 2 }}>
+        />
+        <Typography id="alert-dialog-description" sx={{ mt: 2, mb: 2 }}>
           남은 시간 {remaining}초
-        </DialogContentText>
+        </Typography>
         {remaining <= 0 && (
           <Button
             variant="contained"
@@ -95,17 +80,11 @@ export default function KlipLogin({ open, onClose, user }) {
             재로그인
           </Button>
         )}
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={() => onClose()} autoFocus>
-          취소
-        </Button>
-      </DialogActions>
-    </Dialog>
+      </CardContent>
+    </Card>
   );
 }
 
 KlipLogin.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired
 };

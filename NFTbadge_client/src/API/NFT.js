@@ -1,16 +1,13 @@
 import axios from "axios";
 
-const serverAPI = `https://localhost:4000/user/testAddress`;
+const serverAPI = `https://localhost:4000/user`;
 
-export async function getTestAddress(email, address) {
+export async function getNFT(body) {
   try {
     const res = await axios
       .post(
         serverAPI,
-        {
-          email: email,
-          mainAddress: address 
-        },
+        {email: body},
         {
           headers: {
             "Content-Type": "application/json",

@@ -1,16 +1,34 @@
-// const testAddress = require("./getTestAddress");
+const testAddress = require("./getTestAddress");
 const {getSheets} = require("../googleApi/getSheets");
 const {Student} = require('../models');
 
 module.exports = {
-  // createUser: (req, res) => {
+  createTestAddress: async (req, res) => {
+    console.log(req.body);
+    const result = await testAddress.address;
 
-  //   const result = testAddress.address;
-  //   return res.status(200).send({
-  //     message: "Not working Server. Yet...",
-  //     result,
-  //   });
-  // },
+    await Student.update(
+      {
+        mainAddress: req.body.mainAddress,
+        testAddress: result
+      },
+      {
+        where: {
+          email: req.body.email
+      }}
+    )
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
+    return res.status(200).send({
+      message: "Not working Server. Yet...",
+      result,
+    });
+  },
 
   postUser: async (req, res) => {
     await getSheets();
@@ -24,5 +42,9 @@ module.exports = {
         console.log(err);
         res.sendStatus(500);
       });
+  },
+
+  getNFTs: async (req, res) => {
+    
   }
 };
