@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, TextField, Fade, FormControl, InputLabel, Select, MenuItem} from "@mui/material";
 import { postUser } from "../API/Login";
-import { getNFT } from "../API/NFT";
+// import { getNFT } from "../API/NFT";
 import KlipLogin from "./KlipLogin";
 import { useRecoilState } from "recoil";
 import { userState } from "../recoil/user";

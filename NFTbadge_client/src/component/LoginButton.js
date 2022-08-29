@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Button } from "@mui/material";
 import KlipLogin from "./KlipLogin";
 
+// 로그인 버튼인데 안쓸거임
 export default function LoginButton({ user }) {
   const [isWalletOpen, setIsWalletOpen] = useState(false);
 
